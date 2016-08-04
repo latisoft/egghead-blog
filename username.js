@@ -1,6 +1,6 @@
 var express = require('express');
-var helpers = require('./helpers');
-var fs = require('fs');
+// var helpers = require('./helpers');
+// var fs = require('fs');
 
 var User = require('./db').User;
 
@@ -35,6 +35,8 @@ router.put('/', function (req, res) {
   User.findOne({username: username}, function (err, user) {
     if (err) console.error(err);
 
+    console.log("req.body: ", req.body);
+    
     user.name.full = req.body.name;
     user.location = req.body.location;
     user.save(function () {
@@ -44,9 +46,13 @@ router.put('/', function (req, res) {
 });
 
 router.delete('/', function (req, res) {
-  var fp = helpers.getUserFilePath(req.params.username);
-  fs.unlinkSync(fp); // delete the file
-  res.sendStatus(200);
+  var username = req.params.username;
+
+  User.findOne({username: username}).remove().exec(function (err, user) {
+    if (err) console.error(err);
+    res.sendStatus(200);
+  });
+
 });
 
 module.exports = router;

@@ -3,19 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <title>User Index</title>
-  <link rel="stylesheet" type="text/css" href="/css/index.css">
-  <script src="/js/user.js"></script>
+  <style>
+    * {
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      padding: 1em;
+      font-size: 1.2em;
+    }
+
+    div a {
+      padding-left: 0.5em;
+    }
+  </style>
 </head>
 <body>
 
   <h1>Handlebars</h1>
   <button>home</button>
-  <button onclick="add();">new</button>
+  <button onclick="addnew();">new</button>  
   {{#each users as |user|}}
   <div>
     <img src="/profilepics/{{user.username}}_sm.jpg" alt="">
     <a href="/{{user.username}}">{{user.name.full}}</a>
   </div>
   {{/each}}
+
+  <script>
+    function addnew () {
+      console.log("addnew ...");
+      location = '/addnew';
+    }
+  </script>
+
 </body>
 </html>

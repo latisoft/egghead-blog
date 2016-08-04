@@ -1,9 +1,9 @@
 // var uri = 'mongodb://localhost:27017/test';
-// var uri= 'mongodb://root:allen@ds033015.mlab.com:33015/allen-exmo';
 var uri=process.env.MONGODB_URI || 'mongodb://root:allen@ds033015.mlab.com:33015/allen-exmo';
 
 var _ = require('lodash');
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 mongoose.connect(uri);
 
 var db = mongoose.connection;
